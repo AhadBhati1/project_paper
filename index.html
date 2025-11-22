@@ -374,6 +374,52 @@
             width: 100%;
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--black);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover {
+            color: var(--red);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--black);
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: var(--black);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--red);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -990,7 +1036,15 @@
                 height: 24px;
             }
 
-            nav {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .desktop-nav {
                 gap: 1.5rem;
             }
 
@@ -1254,12 +1308,19 @@
         <div class="logo">
             <img src="Screenshot_2025-08-18_014645-removebg-preview(1).png" alt="Project Paper">
         </div>
-        <nav>
+        <nav class="desktop-nav">
             <a href="#philosophy">philosophy</a>
             <a href="#story">story</a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSebx-JSVSy04HjLNIZrxtPMa2xwTmH0eQbcvIh-VnaoAz0qTA/viewform?usp=sharing&ouid=112047397553110393266" target="_blank">waitlist</a>
             <a href="#footer">connect</a>
         </nav>
+        <button class="mobile-menu-toggle">&#8942;</button>
+        <div class="mobile-menu">
+            <a href="#philosophy">philosophy</a>
+            <a href="#story">story</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSebx-JSVSy04HjLNIZrxtPMa2xwTmH0eQbcvIh-VnaoAz0qTA/viewform?usp=sharing&ouid=112047397553110393266" target="_blank">waitlist</a>
+            <a href="#footer">connect</a>
+        </div>
     </header>
 
     <!-- Hero Section -->
@@ -1693,6 +1754,21 @@
 
         // Auto-loop rotation disabled - manual navigation only
         // setInterval(nextSlide, 4000);
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
